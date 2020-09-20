@@ -10,17 +10,17 @@ export const LOGOUT_FAILED = '[App] Logout Failed';
 
 export class LoginUser implements Action {
   readonly type = LOGIN_USER;
-  constructor(public payload: any) {}
+  constructor(public payload?: any) {}
 }
 
 export class LoginUserFail implements Action {
   readonly type = LOGIN_USER_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload?: any) {}
 }
 
-export class LoginUserSUccess implements Action {
+export class LoginUserSuccess implements Action {
   readonly type = LOGIN_USER_SUCCESS;
   constructor(public payload: SocialUser) {}
 }
 
-export type UserAction = LoginUser | LoginUserFail | LoginUserSUccess;
+export type UserAction = LoginUser | LoginUserFail | LoginUserSuccess;

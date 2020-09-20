@@ -2,14 +2,25 @@ import { SocialUser } from 'angularx-social-login';
 import * as fromUsers from '../actions';
 
 export interface UserState {
-  user: SocialUser;
+  userDetails: SocialUser;
   loggedIn: boolean;
   login: boolean;
   logout: boolean;
 }
 
 export const initialState: UserState = {
-  user: undefined,
+  userDetails: {
+    provider: 'hello',
+    id: '1234',
+    email: 'no email',
+    name: 'no name',
+    photoUrl: 'dsdsds',
+    firstName: 'adasds',
+    lastName: 'hbghjgh',
+    authToken: 'sdsds',
+    idToken: 'dsdsdsd',
+    authorizationCode: 'sdsdsd',
+  },
   loggedIn: false,
   login: false,
   logout: false,
@@ -34,6 +45,7 @@ export function reducer(
         login: false,
         loggedIn: true,
         logout: false,
+        userDetails: action.payload,
       };
     }
     case fromUsers.LOGIN_USER_FAIL: {
@@ -48,3 +60,10 @@ export function reducer(
 
   return state;
 }
+
+// state selectors
+
+export const getUserDetails = (state: UserState) => state.userDetails;
+export const getUserLoggedIn = (state: UserState) => state.loggedIn;
+export const getUserLogin = (state: UserState) => state.login;
+export const getUserLogout = (state: UserState) => state.logout;

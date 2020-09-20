@@ -1,11 +1,29 @@
 import { Injectable } from '@angular/core';
-import { LoginModule } from '../../containers/login/login.module';
 
-import { HttpClient } from '@angular/common/http';
+import {
+  SocialAuthService,
+  GoogleLoginProvider,
+  SocialUser,
+} from 'angularx-social-login';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
-  providedIn: LoginModule,
+  providedIn: 'any',
 })
 export class LoginService {
-  constructor(private http: HttpClient) {}
+  constructor(private authService: SocialAuthService) {}
+
+  private signInWithGoogle(): Promise<SocialUser> {
+    return this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+
+  signIn(): Observable<SocialUser> {
+    const signInPromise: Promise<SocialUser> = this.signInWithGoogle();
+    const signIn$: Observable<SocialUser> = from(signInPromise);
+    return signIn$;
+  }
 }

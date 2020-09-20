@@ -4,17 +4,16 @@ import { Store } from '@ngrx/store';
 import * as fromUserStore from '../login/store';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/shared/user.service';
-
-
-
+import { catchError, map } from 'rxjs/operators';
+import { UserService } from '../../services/shared/user.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-onboard',
+  templateUrl: './onboard.component.html',
+  styleUrls: ['./onboard.component.scss'],
+  providers: [UserService],
 })
-export class HomeComponent implements OnInit {
+export class OnboardComponent implements OnInit {
   private userLoggedIn$: Observable<Boolean>;
 
   constructor(
@@ -24,10 +23,10 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.checkLoggedInAndRedirect('/home');
+    this.userService.checkLoggedInAndRedirect('/onboard');
   }
 
-  onboard() {
-    this.router.navigate(['/onboard']);
+  home() {
+    this.router.navigate(['/home']);
   }
 }
